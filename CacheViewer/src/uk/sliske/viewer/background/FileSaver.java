@@ -12,7 +12,7 @@ public class FileSaver {
 	}
 
 	public FileSaver(String fileName) {
-		String directory = "C:\\users\\Robert";
+		String directory = System.getProperty("user.home");
 		directory += "\\models\\";
 		createFile(directory + fileName);
 	}
