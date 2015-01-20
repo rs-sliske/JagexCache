@@ -1,3 +1,5 @@
+package uk.sliske.viewer.background;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
