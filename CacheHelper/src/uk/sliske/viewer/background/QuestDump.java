@@ -16,6 +16,7 @@ public class QuestDump {
 			quests.add(loader.load(i));
 			i++;
 		}
+		
 		System.out.println(quests.size() + " quests loaded");
 		FileSaver file = new FileSaver("QuestDump.txt",
 				"C:\\users\\Robert\\Desktop\\");

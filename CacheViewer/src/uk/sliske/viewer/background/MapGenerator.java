@@ -9,8 +9,9 @@ import com.sk.cache.fs.CacheSystem;
 import com.sk.cache.wrappers.loaders.RegionLoader;
 import com.sk.cache.wrappers.region.Region;
 import com.sk.cache.wrappers.region.RegionUtil;
-
+@SuppressWarnings("unused")
 public class MapGenerator {
+	
 	private static final int AVAILABLE = 0x000000;
 	private static final int BLOCKED = 0xFF0000;;
 

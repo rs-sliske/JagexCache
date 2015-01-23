@@ -4,6 +4,7 @@ import com.sk.cache.wrappers.Model;
 import com.sk.cache.wrappers.NpcDefinition;
 import com.sk.cache.wrappers.loaders.ModelLoader;
 
+
 public class NPCSaver {
 
 	public NPCSaver(NpcDefinition npc, String folder) {
@@ -17,6 +18,7 @@ public class NPCSaver {
 
 		new OBJCreator(model, npc.name, folder);
 	}
+	
 
 	public NPCSaver(NpcDefinition npc) {
 		this(npc, "");

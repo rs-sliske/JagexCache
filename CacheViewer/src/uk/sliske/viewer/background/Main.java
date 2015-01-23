@@ -35,10 +35,10 @@ public class Main {
 			ObjectDefinitionLoader objectLoader = new ObjectDefinitionLoader(
 					cache);
 
-			if (!handleArgs(npcLoader, objectLoader, itemLoader, questLoader,
-					args)) {
+			handleArgs(npcLoader, objectLoader, itemLoader, questLoader, args);
 
-			}
+			itemSearch(itemLoader, "*clay");
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -119,14 +119,9 @@ public class Main {
 				String s = loader.load(i).name;
 				if (1 > 100000)
 					break;
-				try {
-					for (String n : names) {
-						if (s.toLowerCase().contains(n)) {
-							res.add(i);
-							System.out.println(i + " : " + s);
-						}
-					}
-				} catch (Exception e) {
+				if (check(res, s, names)) {
+					res.add(i);
+					System.out.println(i + " : " + s);
 				}
 			}
 			i++;
@@ -146,15 +141,9 @@ public class Main {
 				String s = loader.load(i).name;
 				if (i > 50000)
 					break;
-				try {
-					for (String n : names) {
-						if (s.toLowerCase().contains(n)) {
-							res.add(i);
-							System.out.println(i + " : " + s);
-						}
-					}
-				} catch (Exception e) {
-
+				if (check(res, s, names)) {
+					res.add(i);
+					System.out.println(i + " : " + s);
 				}
 			}
 			i++;
@@ -174,15 +163,9 @@ public class Main {
 				String s = loader.load(i).name;
 				if (1 > 100000)
 					break;
-				try {
-					for (String n : names) {
-						if (s.toLowerCase().contains(n)) {
-							res.add(i);
-							System.out.println(i + " : " + s);
-						}
-					}
-				} catch (Exception e) {
-
+				if (check(res, s, names)) {
+					res.add(i);
+					System.out.println(i + " : " + s);
 				}
 			}
 			i++;
@@ -202,20 +185,32 @@ public class Main {
 				String s = loader.load(i).name;
 				if (1 > 100000)
 					break;
-				try {
-					for (String n : names) {
-						if (s.toLowerCase().contains(n)) {
-							res.add(i);
-							System.out.println(i + " : " + s);
-						}
-					}
-				} catch (Exception e) {
 
+				if (check(res, s, names)) {
+					res.add(i);
+					System.out.println(i + " : " + s);
 				}
 			}
 			i++;
 		}
 		return res;
+	}
+
+	static boolean check(ArrayList<Integer> res, String s, String[] names) {
+		try {
+			for (String n : names) {
+				if (n.startsWith("*")) {
+					if (s.toLowerCase().equals(n.substring(1))) {
+						return true;
+					}
+				} else if (s.toLowerCase().contains(n)) {
+					return true;
+				}
+			}
+		} catch (Exception e) {
+
+		}
+		return false;
 	}
 
 	static boolean handleArgs(NpcDefinitionLoader npc,

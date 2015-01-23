@@ -11,6 +11,7 @@ public class OBJCreator {
 		String path = folder + "\\";
 		if (folder.isEmpty())
 			path = "";
+		
 
 		file = new FileSaver(name + ".obj");
 

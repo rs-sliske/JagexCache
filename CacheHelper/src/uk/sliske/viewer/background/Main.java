@@ -7,10 +7,8 @@ import java.util.Scanner;
 
 import com.sk.cache.DataSource;
 import com.sk.cache.fs.CacheSystem;
-import com.sk.cache.wrappers.loaders.ItemDefinitionLoader;
-import com.sk.cache.wrappers.loaders.NpcDefinitionLoader;
-import com.sk.cache.wrappers.loaders.ObjectDefinitionLoader;
-import com.sk.cache.wrappers.loaders.QuestDefinitionLoader;
+import com.sk.cache.wrappers.loaders.*;
+import com.sk.cache.wrappers.*;
 
 @SuppressWarnings("unused")
 public class Main {
@@ -55,6 +53,7 @@ public class Main {
 				String arg = task
 						+ ", " + scanner.nextLine();
 				final String[] args = arg.split(", ");
+				
 
 				handleArgs(npcLoader, objectLoader, itemLoader, questLoader, args);
 
