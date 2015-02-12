@@ -1,11 +1,14 @@
 package uk.sliske.viewer.background;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class FileSaver {
 
 	private PrintWriter file;
+	
+	private File f;
 
 	public FileSaver(String fileName, String path) {
 		createFile(path + fileName);
@@ -21,7 +24,6 @@ public class FileSaver {
 
 		try {
 			file = new PrintWriter(s);
-
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);

@@ -58,6 +58,7 @@ public class Main {
 				handleArgs(npcLoader, objectLoader, itemLoader, questLoader, args);
 
 			}
+			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
