@@ -2,11 +2,13 @@ package uk.sliske.viewer.background;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import uk.sliske.viewer.graphics.Graphics;
+import uk.sliske.viewer.frame.CacheWindow;
+import uk.sliske.viewer.graphics.GraphicsMGR;
 
 import com.sk.cache.DataSource;
 import com.sk.cache.fs.CacheSystem;
@@ -31,6 +33,7 @@ public class Main {
 	private final ItemDefinitionLoader		itemLoader;
 	private final QuestDefinitionLoader		questLoader;
 	private final ObjectDefinitionLoader	objectLoader;
+	
 
 	private Main() {
 		CacheSystem cache = null;
@@ -46,40 +49,44 @@ public class Main {
 		itemLoader = new ItemDefinitionLoader(cache);
 		questLoader = new QuestDefinitionLoader(cache);
 		objectLoader = new ObjectDefinitionLoader(cache);
-		System.out.println("searches - objectsearch, itemsearch, questsearch, npcsearch -");
-		System.out.println("         - args = the name/part of the name");
-		System.out.println("prints   - npc, item, object -");
-		System.out.println("         - args = the ids of the thing you want");
-		System.out.println("other:");
-		System.out
-				.println(" - models, will save an obj file of the npcs model in your home directory");
-		System.out.println("           models - args = the name of the npcs");
-		System.out.println("           models - args = the ids of the npcs");
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
-		final Scanner scanner = new Scanner(System.in);
-		while (true) {
-			System.out.print("What task? : ");
-			final String task = scanner.nextLine();
-			if (task.equals("exit")) {
-				break;
-			}
-
-			System.out.print("args : ");
-			String arg = task + ", " + scanner.nextLine();
-			final String[] args = arg.split(", ");
-
-			handleArgs(npcLoader, objectLoader, itemLoader, questLoader, args);
-
-		}
-		scanner.close();
+		
+		new Search(cache);
+		new CacheWindow();
+		
+//		System.out.println("searches - objectsearch, itemsearch, questsearch, npcsearch -");
+//		System.out.println("         - args = the name/part of the name");
+//		System.out.println("prints   - npc, item, object -");
+//		System.out.println("         - args = the ids of the thing you want");
+//		System.out.println("other:");
+//		System.out
+//				.println(" - models, will save an obj file of the npcs model in your home directory");
+//		System.out.println("           models - args = the name of the npcs");
+//		System.out.println("           models - args = the ids of the npcs");
+//		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//
+//		final Scanner scanner = new Scanner(System.in);
+//		while (true) {
+//			System.out.print("What task? : ");
+//			final String task = scanner.nextLine();
+//			if (task.equals("exit")) {
+//				break;
+//			}
+//
+//			System.out.print("args : ");
+//			String arg = task + ", " + scanner.nextLine();
+//			final String[] args = arg.split(", ");
+//
+//			handleArgs(npcLoader, objectLoader, itemLoader, questLoader, args);
+//
+//		}
+//		scanner.close();
 	}
 
 	public static void main(String[] args) {
 		new Main();
 	}
 
-	static int[] toIntArray(List<Integer> args) {
+	 int[] toIntArray(List<Integer> args) {
 		int[] res = new int[args.size()];
 		for (int i = 0; i < args.size(); i++) {
 			res[i] = args.get(i);
@@ -87,7 +94,7 @@ public class Main {
 		return res;
 	}
 
-	static int[] toIntArray(String... args) {
+	 int[] toIntArray(String... args) {
 		ArrayList<Integer> i = new ArrayList<>();
 		for (String s : args) {
 			try {
@@ -100,47 +107,47 @@ public class Main {
 		return toIntArray(i);
 	}
 
-	static void printNPCs(NpcDefinitionLoader loader, String... ids) {
-		printNPCs(loader, toIntArray(ids));
+	 void printNPCs(NpcDefinitionLoader loader, String... ids) {
+		printNPCs(npcLoader, toIntArray(ids));
 	}
 
-	static void printItems(ItemDefinitionLoader loader, String... ids) {
+	 void printItems(ItemDefinitionLoader loader, String... ids) {
 		printItems(loader, toIntArray(ids));
 	}
 
-	static void printObjects(ObjectDefinitionLoader loader, String... ids) {
+	void printObjects(ObjectDefinitionLoader loader, String... ids) {
 		printObjects(loader, toIntArray(ids));
 	}
 
-	static void printNPCs(NpcDefinitionLoader loader, int... ids) {
+	void printNPCs(NpcDefinitionLoader loader, int... ids) {
 		for (int i : ids) {
 			System.out.println(loader.load(i));
 		}
 	}
 
-	static void printItems(ItemDefinitionLoader loader, int... ids) {
+	 void printItems(ItemDefinitionLoader loader, int... ids) {
 		for (int i : ids) {
 			System.out.println(loader.load(i));
 		}
 	}
 
-	static void printObjects(ObjectDefinitionLoader loader, int... ids) {
+	 void printObjects(ObjectDefinitionLoader loader, int... ids) {
 		for (int i : ids) {
 			System.out.println(loader.load(i));
 		}
 	}
 
-	static void saveModels(NpcDefinitionLoader loader, String folder, int... ids) {
+	 void saveModels(NpcDefinitionLoader loader, String folder, int... ids) {
 		for (int i : ids) {
 			new NPCSaver(loader.load(i), folder);
 		}
 	}
 
-	static void saveModels(NpcDefinitionLoader loader, int... ids) {
+	void saveModels(NpcDefinitionLoader loader, int... ids) {
 		saveModels(loader, "", ids);
 	}
 
-	static ArrayList<Integer> itemSearch(ItemDefinitionLoader loader, String... names) {
+	 ArrayList<Integer> itemSearch(ItemDefinitionLoader loader, String... names) {
 		ArrayList<Integer> res = new ArrayList<Integer>();
 		for (String s : names) {
 			s.toLowerCase();
@@ -160,7 +167,7 @@ public class Main {
 		return res;
 	}
 
-	static ArrayList<Integer> npcSearch(NpcDefinitionLoader loader, String... names) {
+	 ArrayList<Integer> npcSearch(NpcDefinitionLoader loader, String... names) {
 		ArrayList<Integer> res = new ArrayList<Integer>();
 		for (String s : names) {
 			s.toLowerCase();
@@ -180,7 +187,7 @@ public class Main {
 		return res;
 	}
 
-	static ArrayList<Integer> questSearch(QuestDefinitionLoader loader, String... names) {
+	 ArrayList<Integer> questSearch(QuestDefinitionLoader loader, String... names) {
 		ArrayList<Integer> res = new ArrayList<Integer>();
 		for (String s : names) {
 			s.toLowerCase();
@@ -200,7 +207,7 @@ public class Main {
 		return res;
 	}
 
-	static ArrayList<Integer> objectSearch(ObjectDefinitionLoader loader, String... names) {
+	 ArrayList<Integer> objectSearch(ObjectDefinitionLoader loader, String... names) {
 		ArrayList<Integer> res = new ArrayList<Integer>();
 		for (String s : names) {
 			s.toLowerCase();
@@ -221,7 +228,7 @@ public class Main {
 		return res;
 	}
 
-	static boolean check(ArrayList<Integer> res, String s, String[] names) {
+	 boolean check(ArrayList<Integer> res, String s, String[] names) {
 		try {
 			for (String n : names) {
 				if (n.startsWith("*")) {
@@ -247,7 +254,12 @@ public class Main {
 
 		File f = new File(System.getProperty("user.home") + "\\models\\" + npc.name + ".obj");
 		
-		new Graphics(f);
+		try {
+			new GraphicsMGR(f);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

@@ -39,7 +39,7 @@ public class Display extends Canvas {
 			createBufferStrategy(1);
 			bufferStrategy = getBufferStrategy();
 			graphics = bufferStrategy.getDrawGraphics();
-
+			return;
 		}
 		frameBuffer.copyToByteArray(displayComponents);
 		graphics.drawImage(displayImage, 0, 0, frameBuffer.getWidth(), frameBuffer.getHeight(), null);
@@ -48,5 +48,9 @@ public class Display extends Canvas {
 
 	public RenderContext getFrameBuffer() {
 		return frameBuffer;
+	}
+	
+	public void setGraphics(Graphics g){
+		this.graphics = g;
 	}
 }

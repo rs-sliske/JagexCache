@@ -6,17 +6,18 @@ import java.io.PrintWriter;
 
 public class FileSaver {
 
-	private PrintWriter file;
-	
-	private File f;
+	private PrintWriter	file;
+
+	private File		f;
 
 	public FileSaver(String fileName, String path) {
 		createFile(path + fileName);
 	}
 
 	public FileSaver(String fileName) {
-		String directory = System.getProperty("user.home");
-		directory += "\\models\\";
+		String directory = Constants.MODEL_PATH;
+		File tempFile = new File(directory);
+		tempFile.mkdirs();
 		createFile(directory + fileName);
 	}
 
@@ -37,11 +38,11 @@ public class FileSaver {
 		file.append(s);
 	}
 
-	public void appendln(String s){
+	public void appendln(String s) {
 		append(s);
 		append("\n");
 	}
-	
+
 	public void close() {
 		file.close();
 
