@@ -8,8 +8,6 @@ public class FileSaver {
 
 	private PrintWriter	file;
 
-	private File		f;
-
 	public FileSaver(String fileName, String path) {
 		createFile(path + fileName);
 	}

@@ -1,25 +1,13 @@
 package uk.sliske.viewer.frame;
 
-import java.awt.Button;
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-
-import com.sk.cache.wrappers.loaders.NpcDefinitionLoader;
+import javax.swing.*;
 
 import uk.sliske.viewer.background.Search;
 import uk.sliske.viewer.graphics.Display;
@@ -27,12 +15,10 @@ import uk.sliske.viewer.graphics.GraphicsMGR;
 import uk.sliske.viewer.wrappers.MiniDef;
 import uk.sliske.viewer.wrappers.NPC;
 
-import javax.swing.JTabbedPane;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import com.sk.cache.wrappers.loaders.NpcDefinitionLoader;
 
 public class NpcPanel extends JPanel {
+	private static final long	serialVersionUID	= 1L;
 	private JTextField		textField;
 	private Display			canvas;
 	private JList<Object>	list;
@@ -113,7 +99,6 @@ public class NpcPanel extends JPanel {
 				try {
 					GraphicsMGR.showModel(o.id, canvas);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

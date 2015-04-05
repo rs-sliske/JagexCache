@@ -257,7 +257,6 @@ public class Main {
 		try {
 			new GraphicsMGR(f);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

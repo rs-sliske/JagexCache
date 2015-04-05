@@ -30,7 +30,6 @@ public class MapGenerator {
 		try {
 			cacheStuff();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
