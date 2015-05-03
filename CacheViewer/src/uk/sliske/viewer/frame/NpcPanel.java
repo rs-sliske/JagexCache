@@ -8,6 +8,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import uk.sliske.viewer.background.Search;
+import uk.sliske.viewer.background.Util;
 import uk.sliske.viewer.graphics.GraphicsMGR;
 import uk.sliske.viewer.wrappers.MiniDef;
 import uk.sliske.viewer.wrappers.NPC;
@@ -16,16 +17,18 @@ import com.sk.cache.wrappers.loaders.NpcDefinitionLoader;
 
 public class NpcPanel extends SearchPane {
 	private static final long	serialVersionUID	= 1L;
-
+	private final NpcSourcePanel srcpanel;
 	NpcPanel() {
 		super();
+		srcpanel = new NpcSourcePanel();
 		listListener = new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
-				NPC i = (NPC) list.getSelectedValue();
+				final NPC i = (NPC) list.getSelectedValue();
 				System.out.println("the npc your have chosen to show is " + i.name);
 				try {
 					GraphicsMGR.showModel(i.id, canvas);
+					srcpanel.replaceText(Util.modelfilemgr(i.id));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -33,6 +36,7 @@ public class NpcPanel extends SearchPane {
 				repaint();
 			}
 		};
+		tabbedPane.add("src", srcpanel);
 		finishInit();
 	}
 

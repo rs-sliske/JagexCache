@@ -3,13 +3,9 @@ package uk.sliske.viewer.graphics;
 import java.io.File;
 import java.io.IOException;
 
-import uk.sliske.viewer.background.Constants;
-import uk.sliske.viewer.background.NPCSaver;
-import uk.sliske.viewer.background.Search;
 import uk.sliske.viewer.background.Util;
 
 import com.custard130.util.IO.WebIO;
-import com.sk.cache.wrappers.NpcDefinition;
 
 public class GraphicsMGR {
 	private static GraphicsMGR	currentGraphics;
@@ -20,32 +16,17 @@ public class GraphicsMGR {
 		return currentGraphics;
 	}	
 
-	private static File modelfilemgr(final int npcID) {
-		if (!Search.get().npcLoader.canLoad(npcID)) return null;
-		NpcDefinition npc = Search.get().npcLoader.load(npcID);
-		String s = npc.name;
-		StringBuilder name = new StringBuilder(Constants.MODEL_PATH);
-		char[] ch = s.toCharArray();
-		for (Character c : ch) 
-			if (!Util.checkChar(c, Constants.BANNED_CHARS)) 
-				name.append(c);
-		
-		name.append(" ").append(npcID).append(".obj");
-		File f = new File(name.toString());
-		if (!f.exists())
-			new NPCSaver(npc, name.substring(Constants.MODEL_PATH.length(), name.length() - 4), "");
-		return f;
-	}
+	
 
 	public static GraphicsMGR showModel(final int id) throws IOException {
-		File f = modelfilemgr(id);
+		File f = Util.modelfilemgr(id);
 		if (f == null) return null;
 		return new GraphicsMGR(f);
 
 	}
 
 	public static GraphicsMGR showModel(final int id, Display d) throws IOException {
-		File f = modelfilemgr(id);
+		File f = Util.modelfilemgr(id);
 		if (f == null) return null;
 		return new GraphicsMGR(f, d);
 	}

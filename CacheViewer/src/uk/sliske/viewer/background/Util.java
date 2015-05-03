@@ -1,8 +1,11 @@
 package uk.sliske.viewer.background;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.sk.cache.wrappers.NpcDefinition;
 
 import uk.sliske.viewer.graphics.IndexedModel;
 import uk.sliske.viewer.graphics.Vector4f;
@@ -83,5 +86,21 @@ public class Util {
 		}
 		
 		return true;
+	}
+	public static File modelfilemgr(final int npcID) {
+		if (!Search.get().npcLoader.canLoad(npcID)) return null;
+		NpcDefinition npc = Search.get().npcLoader.load(npcID);
+		String s = npc.name;
+		StringBuilder name = new StringBuilder(Constants.MODEL_PATH);
+		char[] ch = s.toCharArray();
+		for (Character c : ch) 
+			if (!Util.checkChar(c, Constants.BANNED_CHARS)) 
+				name.append(c);
+		
+		name.append(" ").append(npcID).append(".obj");
+		File f = new File(name.toString());
+		if (!f.exists())
+			new NPCSaver(npc, name.substring(Constants.MODEL_PATH.length(), name.length() - 4), "");
+		return f;
 	}
 }

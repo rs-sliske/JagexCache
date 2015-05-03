@@ -27,19 +27,19 @@ import uk.sliske.viewer.graphics.Display;
 import uk.sliske.viewer.wrappers.MiniDef;
 
 public abstract class SearchPane extends JPanel {
-	private static final long	serialVersionUID	= 1L;
-	private JTextField			textField;
+	private static final long		serialVersionUID	= 1L;
+	private JTextField				textField;
 	protected Display				canvas;
-	protected JList<Object>		list;
-	private JPanel				panel;
-	protected final JTabbedPane	tabbedPane;
-	private JButton				btnToggleIds;
+	protected JList<Object>			list;
+	private JPanel					panel;
+	protected final JTabbedPane		tabbedPane;
+	private JButton					btnToggleIds;
 	protected Collection<MiniDef>	currentData;
-	private JLabel				lblExactMatch;
-	private JRadioButton		exactMatch;
-	protected ListSelectionListener listListener;
-	protected final JPanel infoPanel;
-	private boolean hasSearched = false;
+	private JLabel					lblExactMatch;
+	private JRadioButton			exactMatch;
+	protected ListSelectionListener	listListener;
+	protected final JPanel			infoPanel;
+	private boolean					hasSearched			= false;
 
 	SearchPane() {
 		currentData = new ArrayList<>();
@@ -87,7 +87,7 @@ public abstract class SearchPane extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				search(textField.getText());
-				hasSearched=true;
+				hasSearched = true;
 			}
 		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -100,7 +100,6 @@ public abstract class SearchPane extends JPanel {
 		JScrollPane listPane = new JScrollPane(list, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-		
 		lblExactMatch = new JLabel("exact match");
 		GridBagConstraints gbc_lblExactMatch = new GridBagConstraints();
 		gbc_lblExactMatch.insets = new Insets(0, 0, 5, 5);
@@ -109,15 +108,14 @@ public abstract class SearchPane extends JPanel {
 		add(lblExactMatch, gbc_lblExactMatch);
 
 		exactMatch = new JRadioButton("");
-		
-		exactMatch.addChangeListener(new ChangeListener() {			
+
+		exactMatch.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				if(hasSearched)
-				search(textField.getText());
+				if (hasSearched) search(textField.getText());
 			}
 		});
-		
+
 		GridBagConstraints gbc_rdbtnExact = new GridBagConstraints();
 		gbc_rdbtnExact.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnExact.gridx = 2;
@@ -145,8 +143,8 @@ public abstract class SearchPane extends JPanel {
 		add(btnToggleIds, gbc_btnToggleIds);
 
 	}
-	
-	protected final void finishInit(){
+
+	protected final void finishInit() {
 		list.addListSelectionListener(listListener);
 	}
 
