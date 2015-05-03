@@ -1,11 +1,18 @@
-package uk.sliske.viewer.graphics;
+package uk.sliske.viewer.background;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import uk.sliske.viewer.graphics.IndexedModel;
+import uk.sliske.viewer.graphics.Vector4f;
+
 public class Util {
-	
+	public static boolean checkChar(final char c, final String s) {
+		for (Character ch : s.toCharArray())
+			if (ch == c) return true;
+		return false;
+	}
 	public static String[] removeEmptyStrings(String[] data) {
 		ArrayList<String> result = new ArrayList<String>();
 		

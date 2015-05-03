@@ -6,7 +6,7 @@ import com.sk.cache.wrappers.loaders.ModelLoader;
 
 public class NPCSaver {
 
-	public NPCSaver(NpcDefinition npc, String folder) {
+	public NPCSaver(NpcDefinition npc,String name, String folder) {
 
 		Model model = new ModelLoader(npc.getLoader().getCacheSystem())
 				.load(npc.modelIds[0]);
@@ -15,11 +15,9 @@ public class NPCSaver {
 		// System.out.println(model.getId());
 		// System.out.println(model.vertexCount);
 
-		new OBJCreator(model, npc.name, folder);
+		new OBJCreator(model, name , folder);
 	}
 
-	public NPCSaver(NpcDefinition npc) {
-		this(npc, "");
-	}
+	
 
 }

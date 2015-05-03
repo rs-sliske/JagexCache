@@ -9,7 +9,6 @@ import java.awt.image.DataBufferByte;
 
 public class Display extends Canvas {
 	private static final long		serialVersionUID	= 1L;
-
 	
 	private final RenderContext		frameBuffer;
 	private final BufferedImage		displayImage;

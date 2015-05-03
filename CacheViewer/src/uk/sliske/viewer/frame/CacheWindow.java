@@ -3,7 +3,6 @@ package uk.sliske.viewer.frame;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class CacheWindow extends JFrame{
@@ -16,8 +15,9 @@ public class CacheWindow extends JFrame{
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
-		final JPanel panel = new NpcPanel();
-		tabbedPane.addTab("NPCs", null, panel, null);
+		tabbedPane.addTab("NPCs", null, new NpcPanel(), null);
+		tabbedPane.addTab("Items", null, new ItemPanel(), null);
+		
 		setVisible(true);
 	}
 }

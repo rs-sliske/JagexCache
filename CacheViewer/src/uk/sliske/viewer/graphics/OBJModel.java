@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import uk.sliske.viewer.background.Util;
+
 public class OBJModel
 {
 	private ArrayList<Vector4f> positions;

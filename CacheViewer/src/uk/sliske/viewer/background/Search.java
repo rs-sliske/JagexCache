@@ -3,6 +3,7 @@ package uk.sliske.viewer.background;
 import java.util.ArrayList;
 
 import com.sk.cache.fs.CacheSystem;
+import com.sk.cache.wrappers.loaders.ImageLoader;
 import com.sk.cache.wrappers.loaders.ItemDefinitionLoader;
 import com.sk.cache.wrappers.loaders.NpcDefinitionLoader;
 import com.sk.cache.wrappers.loaders.ObjectDefinitionLoader;
@@ -16,6 +17,7 @@ public class Search {
 	public final ItemDefinitionLoader	itemLoader;
 	public final QuestDefinitionLoader	questLoader;
 	public final ObjectDefinitionLoader	objectLoader;
+	public final ImageLoader imageLoader;
 	
 	private static int maxSearchDepth = 1000000;
 
@@ -31,6 +33,7 @@ public class Search {
 		itemLoader = new ItemDefinitionLoader(cache);
 		questLoader = new QuestDefinitionLoader(cache);
 		objectLoader = new ObjectDefinitionLoader(cache);
+		imageLoader = new ImageLoader(cache);
 	}
 
 	public ArrayList<Integer> itemSearch(String... names) {
