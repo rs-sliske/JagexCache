@@ -1,5 +1,6 @@
 package uk.sliske.viewer.frame;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import uk.sliske.viewer.background.Search;
-import uk.sliske.viewer.wrappers.Item;
+import uk.sliske.viewer.graphics.GraphicsMGR;
 import uk.sliske.viewer.wrappers.MiniDef;
 import uk.sliske.viewer.wrappers.Obj;
 
@@ -21,9 +22,13 @@ public class ObjectPanel extends SearchPane {
 		listListener = new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
-				Item i = (Item) list.getSelectedValue();
+				Obj i = (Obj) list.getSelectedValue();
 				System.out.println("the object your have chosen to show is " + i.name);
-
+				try {
+					GraphicsMGR.showModel_obj(i.id, canvas);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				revalidate();
 				repaint();
 			}

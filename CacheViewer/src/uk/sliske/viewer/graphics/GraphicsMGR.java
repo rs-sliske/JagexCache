@@ -16,17 +16,28 @@ public class GraphicsMGR {
 		return currentGraphics;
 	}	
 
-	
-
-	public static GraphicsMGR showModel(final int id) throws IOException {
-		File f = Util.modelfilemgr(id);
+	public static GraphicsMGR showModel_obj(final int id) throws IOException {
+		File f = Util.modelfilemgr_obj(id);
 		if (f == null) return null;
 		return new GraphicsMGR(f);
 
 	}
 
-	public static GraphicsMGR showModel(final int id, Display d) throws IOException {
-		File f = Util.modelfilemgr(id);
+	public static GraphicsMGR showModel_obj(final int id, Display d) throws IOException {
+		File f = Util.modelfilemgr_obj(id);
+		if (f == null) return null;
+		return new GraphicsMGR(f, d);
+	}
+
+	public static GraphicsMGR showModel_npc(final int id) throws IOException {
+		File f = Util.modelfilemgr_npc(id);
+		if (f == null) return null;
+		return new GraphicsMGR(f);
+
+	}
+
+	public static GraphicsMGR showModel_npc(final int id, Display d) throws IOException {
+		File f = Util.modelfilemgr_npc(id);
 		if (f == null) return null;
 		return new GraphicsMGR(f, d);
 	}

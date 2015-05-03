@@ -27,8 +27,8 @@ public class NpcPanel extends SearchPane {
 				final NPC i = (NPC) list.getSelectedValue();
 				System.out.println("the npc your have chosen to show is " + i.name);
 				try {
-					GraphicsMGR.showModel(i.id, canvas);
-					srcpanel.replaceText(Util.modelfilemgr(i.id));
+					GraphicsMGR.showModel_npc(i.id, canvas);
+					srcpanel.replaceText(Util.modelfilemgr_npc(i.id));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
